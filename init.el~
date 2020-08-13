@@ -1,0 +1,134 @@
+(require 'package)
+(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
+                    (not (gnutls-available-p))))
+       (proto (if no-ssl "http" "https")))
+  (when no-ssl (warn "\
+Your version of Emacs does not support SSL connections,
+which is unsafe because it allows man-in-the-middle attacks.
+There are two things you can do about this warning:
+1. Install an Emacs version that does support SSL and be safe.
+2. Remove this warning from your init file so you won't see it again."))
+  (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
+  ;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
+  ;; and `package-pinned-packages`. Most users will not need or want to do this.
+  ;;(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
+  )
+(package-initialize)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(git-gutter-fringe ripgrep counsel-projectile expand-region doom-modeline doom-themes elixir-mode company company-fuzzy company-tabnine composer multiple-cursors counsel counsel-fd magit projectile)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+
+(require 'git-gutter-fringe)
+(setq git-gutter-fr:side 'right-fringe)
+
+(ivy-mode 1)
+
+(setq ivy-use-virtual-buffers t)
+(setq enable-recursive-minibuffers t)
+;; enable this if you want `swiper' to use it
+;; (setq search-default-mode #'char-fold-to-regexp)
+(global-set-key "\C-s" 'swiper)
+(global-set-key (kbd "C-c C-r") 'ivy-resume)
+(global-set-key (kbd "<f6>") 'ivy-resume)
+(global-set-key (kbd "M-x") 'counsel-M-x)
+(global-set-key (kbd "C-x C-f") 'counsel-find-file)
+(global-set-key (kbd "<f1> f") 'counsel-describe-function)
+(global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+(global-set-key (kbd "<f1> o") 'counsel-describe-symbol)
+(global-set-key (kbd "<f1> l") 'counsel-find-library)
+(global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+(global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+(global-set-key (kbd "C-c g") 'counsel-git)
+(global-set-key (kbd "C-c j") 'counsel-git-grep)
+(global-set-key (kbd "C-c k") 'counsel-ag)
+(global-set-key (kbd "C-x l") 'counsel-locate)
+(global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+(define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+
+(require 'company-tabnine)
+
+(company-mode 1)
+(add-to-list 'company-backends #'company-tabnine)
+
+
+
+
+
+;; Trigger completion immediately.
+(setq company-idle-delay 0.5)
+
+;; Number the candidates (use M-1, M-2 etc to select completions).
+(setq company-show-numbers t)
+
+
+
+(doom-themes-visual-bell-config)
+(load-theme 'doom-city-lights t)
+(doom-modeline-mode 1)
+(setq doom-modeline-project-detection 'project)
+(setq doom-modeline-height 25)
+
+
+(global-set-key (kbd "C-x r t") 'set-rectangular-region-anchor);;
+(global-set-key (kbd "C-;") 'comment-or-uncomment-region)
+(global-set-key (kbd "C-c u") 'uncomment-region)
+(global-set-key (kbd "C-x o") 'find-file-in-project)
+
+(global-set-key (kbd "C-=") 'er/expand-region)
+(global-set-key (kbd "C-x f") 'fiplr-find-file)
+
+(global-set-key (kbd "H-t") 'counsel-projectile-find-file)
+(global-set-key (kbd "C-c C-d") 'duplicate-current-line)
+(global-set-key "\M- " 'hippie-expand)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-M-m") 'mc/mark-more-like-this)
+(global-set-key (kbd "C-*") 'mc/mark-all-like-this)
+(global-set-key (kbd "C-s-c C-s-c") 'mc/edit-lines)
+(global-set-key (kbd "M-<up>") 'scroll-down)
+(global-set-key (kbd "M-<down>") 'scroll-up)
+
+(global-set-key [(hyper a)] 'mark-whole-buffer)
+(global-set-key [(hyper v)] 'yank)
+(global-set-key [(hyper c)] 'kill-ring-save)
+(global-set-key [(hyper s)] 'save-buffer)
+(global-set-key [(hyper l)] 'goto-line)
+(global-set-key [(hyper w)]
+                (lambda () (interactive) (delete-window)))
+(global-set-key [(hyper z)] 'undo)
+
+
+(setq mac-option-modifier 'meta)
+(setq mac-command-modifier 'hyper)
+
+(setq make-backup-files nil)
+(setq auto-save-default nil)
+(setq-default tab-width 2)
+(setq-default indent-tabs-mode nil)
+(setq inhibit-startup-message t)
+(fset 'yes-or-no-p 'y-or-n-p)
+(delete-selection-mode t)
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
+(show-paren-mode t)
+(column-number-mode t)
+(set-window-scroll-bars (minibuffer-window) nil)
+
+
+(setq-default truncate-lines t) ; truk lines are fuckof!!
+
+(projectile-global-mode)
+(setq projectile-indexing-method 'alien)
+
+

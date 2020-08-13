@@ -1,0 +1,2 @@
+;;; Generated package description from /Users/netmask/.emacs.d/elpa/composer-20200214.1119/composer.el  -*- no-byte-compile: t -*-
+(define-package "composer" "20200214.1119" "Interface to PHP Composer" '((emacs "24") (cl-lib "0.5") (s "1.9.0") (f "0.17") (request "0.2.0") (seq "1.9") (php-runtime "0.1.0")) :commit "8b4867e30efcdf10c6d9a74822aa281404377818" :keywords '("tools" "php" "dependency" "manager") :authors '(("USAMI Kenta" . "tadsan@zonu.me")) :maintainer '("USAMI Kenta" . "tadsan@zonu.me") :url "https://github.com/zonuexe/composer.el")
