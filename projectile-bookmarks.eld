@@ -1,1 +1,1 @@
-("~/Projects/kepler/" "~/.emacs.d/emacs-solargraph/" "~/.emacs.d/" "~/Projects/k2/" "~/Projects/ffmail/" "~/Projects/fucho/" "~/emacs-mac/" "~/Projects/sap/" "~/garay_desk/" "~/Projects/billoneurons/" "~/elixir-ls/")
+("~/Projects/kepler/" "~/.emacs.d/" "~/.emacs.d/emacs-solargraph/" "~/Projects/k2/" "~/Projects/ffmail/" "~/Projects/fucho/" "~/emacs-mac/" "~/Projects/sap/" "~/garay_desk/" "~/Projects/billoneurons/" "~/elixir-ls/")
